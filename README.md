@@ -13,4 +13,5 @@ This pattern allows to create classes that interact each other in a deocupled wa
 The first example which shows how to use this pattern is took from the book [Head First Design Patterns](http://shop.oreilly.com/product/9780596007126.do). In the example there is a company asking us to build a set of displays that are able to show different measurements (humidity, pressure, temperature, ...). Those displays are connected to a sensor which is in charge of measuring and then calling the method `changeWeatherData` with the updated info. When that method is called the different displays have to show the new incoming data.
 
 [Weather example classes](https://github.com/mgonzalezbaile/PhpPatterns/tree/master/src/PhpPatterns/Observer/WeatherStation)
+
 [Weather example tests](https://github.com/mgonzalezbaile/PhpPatterns/blob/master/tests/PhpPatterns/Observer/WeatherStation/WeatherStationTest.php)
