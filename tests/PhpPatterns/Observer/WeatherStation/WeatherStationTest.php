@@ -5,9 +5,9 @@ namespace PhpPatterns\Observer\WeatherStation;
 class WeatherStationTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     *  Current conditions and statistics weather are displayed
+     *  Current conditions and weather statistics are displayed
      */
-    public function testShowCurrentConditions()
+    public function testDisplayWeatherInfo()
     {
         $currentWeatherConditionsDisplay = new CurrentWeatherConditionsDisplay();
         $weatherStatisticsDisplay = new WeatherStatisticsDisplay();
