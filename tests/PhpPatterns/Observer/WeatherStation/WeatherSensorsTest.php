@@ -7,7 +7,7 @@ namespace PhpPatterns\Observer\WeatherStation;
  * Class WeatherStationTest
  * @package PhpPatterns\Observer\WeatherStation
  */
-class WeatherStationTest extends \PHPUnit_Framework_TestCase
+class WeatherSensorsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      *  Current conditions and weather statistics are displayed
