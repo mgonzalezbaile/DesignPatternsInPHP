@@ -16,7 +16,8 @@ The first example, which shows how to use this pattern, is took from the book [H
 
 As you can see here our Subject is the weather Station and its state (the weather info) can be changed by the sensors at any time. On the other side the displays are the Observers and they want to be notified every time the weather info is updated to show the new data.
 
-![image](https://cloud.githubusercontent.com/assets/1727504/14110840/c274d61c-f5b7-11e5-9a60-22e0a6a0d48b.png)
+![image](https://cloud.githubusercontent.com/assets/1727504/14111669/245a0e44-f5bb-11e5-8374-8d719ab36f66.png)
+
 
 ### Domain Events
 `Domain Event` is a very important concept in [Domain Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design). They provide a good approach to apply rules that are important for your business in a decoupled way.
