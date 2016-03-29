@@ -38,6 +38,6 @@ Observer Pattern to the rescue! Again we can apply the Observer pattern to decou
 
 In this example you can see that the Subject is not the User itself but a generic Publisher class instead. The reason is that we can make use of a more generic class in charge of publishing the event and reuse it for any kind of event we want to publish.
 
-![image](https://cloud.githubusercontent.com/assets/1727504/14114046/1a81b 2c8-f5c5-11e5-8640-f0920a4da4ae.png)
+![image](https://cloud.githubusercontent.com/assets/1727504/14114274/e0afe050-f5c5-11e5-98ca-603f4ed4e24e.png)
 
 If in the future business asks us to perform a new action when a new user is created, we will only need to create a new Observer doind that functionality. As you can see no modifications on exisiting classes would be needed.
