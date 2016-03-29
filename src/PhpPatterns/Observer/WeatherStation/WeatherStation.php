@@ -13,9 +13,9 @@ class WeatherStation implements Subject
     private $observers = [];
 
     /**
-     * @var WeatherInfo
+     * @var WeatherInfoWasUpdated
      */
-    private $weatherInfo;
+    private $weatherInfoWasUpdated;
 
     /**
      * @param Observer $observer
@@ -41,16 +41,18 @@ class WeatherStation implements Subject
     public function notifyObservers()
     {
         foreach ($this->observers as $observer) {
-            $observer->handleNotification($this->weatherInfo);
+            if ($observer->isSubscribedTo($this->weatherInfoWasUpdated)) {
+                $observer->handleNotification($this->weatherInfoWasUpdated);
+            }
         }
     }
 
     /**
-     * @param WeatherInfo $newWeatherInfo
+     * @param WeatherInfoWasUpdated $newWeatherInfo
      */
-    public function changeWeatherData(WeatherInfo $newWeatherInfo)
+    public function changeWeatherData(WeatherInfoWasUpdated $newWeatherInfo)
     {
-        $this->weatherInfo = $newWeatherInfo;
+        $this->weatherInfoWasUpdated = $newWeatherInfo;
         $this->notifyObservers();
     }
 }

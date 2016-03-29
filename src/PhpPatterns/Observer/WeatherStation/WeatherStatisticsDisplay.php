@@ -33,7 +33,7 @@ class WeatherStatisticsDisplay implements Observer
     }
 
     /**
-     * @param Notification|WeatherInfo $notification
+     * @param Notification|WeatherInfoWasUpdated $notification
      */
     public function handleNotification(Notification $notification)
     {
@@ -46,5 +46,14 @@ class WeatherStatisticsDisplay implements Observer
         print 'Humidity: '.$this->humidityMeasurements."\n";
         print 'Pressure: '.$this->pressureMeasurements."\n";
         print 'Temperature: '.$this->temperatureMeasurements."\n";
+    }
+
+    /**
+     * @param Notification $notification
+     * @return bool
+     */
+    public function isSubscribedTo(Notification $notification)
+    {
+        return $notification instanceof WeatherInfoWasUpdated;
     }
 }

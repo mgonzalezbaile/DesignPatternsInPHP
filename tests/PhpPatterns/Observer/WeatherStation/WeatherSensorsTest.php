@@ -21,16 +21,16 @@ class WeatherSensorsTest extends \PHPUnit_Framework_TestCase
         $weatherStation->registerObserver($weatherStatisticsDisplay);
 
         $weatherStation->changeWeatherData(
-            new WeatherInfo(floatval(rand(0, 100)), floatval(rand(0, 100)), floatval(rand(0, 100)))
+            new WeatherInfoWasUpdated(floatval(rand(0, 100)), floatval(rand(0, 100)), floatval(rand(0, 100)))
         );
         $weatherStation->changeWeatherData(
-            new WeatherInfo(floatval(rand(0, 100)), floatval(rand(0, 100)), floatval(rand(0, 100)))
+            new WeatherInfoWasUpdated(floatval(rand(0, 100)), floatval(rand(0, 100)), floatval(rand(0, 100)))
         );
         $weatherStation->changeWeatherData(
-            new WeatherInfo(floatval(rand(0, 100)), floatval(rand(0, 100)), floatval(rand(0, 100)))
+            new WeatherInfoWasUpdated(floatval(rand(0, 100)), floatval(rand(0, 100)), floatval(rand(0, 100)))
         );
         $weatherStation->changeWeatherData(
-            new WeatherInfo(floatval(rand(0, 100)), floatval(rand(0, 100)), floatval(rand(0, 100)))
+            new WeatherInfoWasUpdated(floatval(rand(0, 100)), floatval(rand(0, 100)), floatval(rand(0, 100)))
         );
     }
 
@@ -44,7 +44,7 @@ class WeatherSensorsTest extends \PHPUnit_Framework_TestCase
         $weatherStation->registerObserver($currentWeatherConditionsDisplay);
         $weatherStation->unregisterObserver($currentWeatherConditionsDisplay);
         $weatherStation->changeWeatherData(
-            new WeatherInfo(floatval(rand(0, 100)), floatval(rand(0, 100)), floatval(rand(0, 100)))
+            new WeatherInfoWasUpdated(floatval(rand(0, 100)), floatval(rand(0, 100)), floatval(rand(0, 100)))
         );
     }
 }

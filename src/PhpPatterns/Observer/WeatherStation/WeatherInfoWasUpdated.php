@@ -4,7 +4,7 @@ namespace PhpPatterns\Observer\WeatherStation;
 
 use PhpPatterns\Observer\Notification;
 
-class WeatherInfo implements Notification
+class WeatherInfoWasUpdated implements Notification
 {
     /**
      * @var float
@@ -22,6 +22,11 @@ class WeatherInfo implements Notification
     private $pressure;
 
     /**
+     * @var \DateTimeImmutable
+     */
+    private $occurredOn;
+
+    /**
      * WeatherInfo constructor.
      * @param float $humidity
      * @param float $temperature
@@ -32,6 +37,7 @@ class WeatherInfo implements Notification
         $this->humidity = $humidity;
         $this->temperature = $temperature;
         $this->pressure = $pressure;
+        $this->occurredOn = new \DateTimeImmutable();
     }
 
     /**
@@ -56,5 +62,13 @@ class WeatherInfo implements Notification
     public function pressure()
     {
         return $this->pressure;
+    }
+
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function occurredOn()
+    {
+        return $this->occurredOn;
     }
 }

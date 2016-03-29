@@ -8,7 +8,7 @@ use PhpPatterns\Observer\Observer;
 class CurrentWeatherConditionsDisplay implements Observer
 {
     /**
-     * @param Notification|WeatherInfo $notification
+     * @param Notification|WeatherInfoWasUpdated $notification
      */
     public function handleNotification(Notification $notification)
     {
@@ -17,5 +17,14 @@ class CurrentWeatherConditionsDisplay implements Observer
         print 'Humidity: '.$notification->humidity()."\n";
         print 'Pressure: '.$notification->pressure()."\n";
         print 'Temperature: '.$notification->temperature()."\n";
+    }
+
+    /**
+     * @param Notification $notification
+     * @return bool
+     */
+    public function isSubscribedTo(Notification $notification)
+    {
+        return $notification instanceof WeatherInfoWasUpdated;
     }
 }
