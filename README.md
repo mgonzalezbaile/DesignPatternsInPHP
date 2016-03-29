@@ -16,5 +16,6 @@ The first example, which shows how to use this pattern, is took from the book [H
 
 As you can see here our Subject is the weather Station and its state (the weather info) can be changed by the sensors at any time. On the other side the displays are the Observers and they want to be notified every time the weather info is updated to show the new data.
 
-![image](https://cloud.githubusercontent.com/assets/1727504/14111562/c1727faa-f5ba-11e5-83ae-88d832b72453.png)
+![image](https://cloud.githubusercontent.com/assets/1727504/14111669/245a0e44-f5bb-11e5-8374-8d719ab36f66.png)
+
 
