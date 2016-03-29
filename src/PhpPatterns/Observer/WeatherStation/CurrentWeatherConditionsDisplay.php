@@ -5,18 +5,33 @@ namespace PhpPatterns\Observer\WeatherStation;
 use PhpPatterns\Observer\Notification;
 use PhpPatterns\Observer\Observer;
 
-class CurrentWeatherConditionsDisplay implements Observer
+class CurrentWeatherConditionsDisplay implements Observer, DisplayElement
 {
+    /**
+     * @var float
+     */
+    private $humidity;
+
+    /**
+     * @var float
+     */
+    private $pressure;
+
+    /**
+     * @var float
+     */
+    private $temperature;
+
     /**
      * @param Notification|WeatherInfoWasUpdated $notification
      */
     public function handleNotification(Notification $notification)
     {
-        print "#######################\n";
-        print 'Current conditions are:'."\n";
-        print 'Humidity: '.$notification->humidity()."\n";
-        print 'Pressure: '.$notification->pressure()."\n";
-        print 'Temperature: '.$notification->temperature()."\n";
+        $this->humidity = $notification->humidity();
+        $this->pressure = $notification->pressure();
+        $this->temperature = $notification->temperature();
+
+        $this->display();
     }
 
     /**
@@ -26,5 +41,17 @@ class CurrentWeatherConditionsDisplay implements Observer
     public function isSubscribedTo(Notification $notification)
     {
         return $notification instanceof WeatherInfoWasUpdated;
+    }
+
+    /**
+     * @return void
+     */
+    public function display()
+    {
+        print "#######################\n";
+        print 'Current conditions are:'."\n";
+        print 'Humidity: '.$this->humidity."\n";
+        print 'Pressure: '.$this->pressure."\n";
+        print 'Temperature: '.$this->temperature."\n";
     }
 }

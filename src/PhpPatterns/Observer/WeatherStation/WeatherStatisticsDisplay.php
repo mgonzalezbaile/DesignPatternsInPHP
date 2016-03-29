@@ -5,7 +5,7 @@ namespace PhpPatterns\Observer\WeatherStation;
 use PhpPatterns\Observer\Notification;
 use PhpPatterns\Observer\Observer;
 
-class WeatherStatisticsDisplay implements Observer
+class WeatherStatisticsDisplay implements Observer, DisplayElement
 {
     /**
      * @var WeatherMeasurementCollection
@@ -41,6 +41,14 @@ class WeatherStatisticsDisplay implements Observer
         $this->pressureMeasurements = $this->pressureMeasurements->add($notification->pressure());
         $this->temperatureMeasurements = $this->temperatureMeasurements->add($notification->temperature());
 
+        $this->display();
+    }
+
+    /**
+     * @return void
+     */
+    public function display()
+    {
         print "#######################\n";
         print 'Statistics:'."\n";
         print 'Humidity: '.$this->humidityMeasurements."\n";
