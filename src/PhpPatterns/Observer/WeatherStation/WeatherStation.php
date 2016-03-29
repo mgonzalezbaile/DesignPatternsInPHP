@@ -5,7 +5,7 @@ namespace PhpPatterns\Observer\WeatherStation;
 use PhpPatterns\Observer\Observer;
 use PhpPatterns\Observer\Subject;
 
-class WeatherData implements Subject
+class WeatherStation implements Subject
 {
     /**
      * @var Observer[]

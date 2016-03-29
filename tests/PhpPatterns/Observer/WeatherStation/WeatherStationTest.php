@@ -2,6 +2,11 @@
 
 namespace PhpPatterns\Observer\WeatherStation;
 
+/**
+ * This class emulates the sensors that measure the weather conditions and update the Weather Station state
+ * Class WeatherStationTest
+ * @package PhpPatterns\Observer\WeatherStation
+ */
 class WeatherStationTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -11,20 +16,20 @@ class WeatherStationTest extends \PHPUnit_Framework_TestCase
     {
         $currentWeatherConditionsDisplay = new CurrentWeatherConditionsDisplay();
         $weatherStatisticsDisplay = new WeatherStatisticsDisplay();
-        $weatherData = new WeatherData();
-        $weatherData->registerObserver($currentWeatherConditionsDisplay);
-        $weatherData->registerObserver($weatherStatisticsDisplay);
+        $weatherStation = new WeatherStation();
+        $weatherStation->registerObserver($currentWeatherConditionsDisplay);
+        $weatherStation->registerObserver($weatherStatisticsDisplay);
 
-        $weatherData->changeWeatherData(
+        $weatherStation->changeWeatherData(
             new WeatherInfo(floatval(rand(0, 100)), floatval(rand(0, 100)), floatval(rand(0, 100)))
         );
-        $weatherData->changeWeatherData(
+        $weatherStation->changeWeatherData(
             new WeatherInfo(floatval(rand(0, 100)), floatval(rand(0, 100)), floatval(rand(0, 100)))
         );
-        $weatherData->changeWeatherData(
+        $weatherStation->changeWeatherData(
             new WeatherInfo(floatval(rand(0, 100)), floatval(rand(0, 100)), floatval(rand(0, 100)))
         );
-        $weatherData->changeWeatherData(
+        $weatherStation->changeWeatherData(
             new WeatherInfo(floatval(rand(0, 100)), floatval(rand(0, 100)), floatval(rand(0, 100)))
         );
     }
@@ -35,10 +40,10 @@ class WeatherStationTest extends \PHPUnit_Framework_TestCase
     public function testUnregisterObserver()
     {
         $currentWeatherConditionsDisplay = new CurrentWeatherConditionsDisplay();
-        $weatherData = new WeatherData();
-        $weatherData->registerObserver($currentWeatherConditionsDisplay);
-        $weatherData->unregisterObserver($currentWeatherConditionsDisplay);
-        $weatherData->changeWeatherData(
+        $weatherStation = new WeatherStation();
+        $weatherStation->registerObserver($currentWeatherConditionsDisplay);
+        $weatherStation->unregisterObserver($currentWeatherConditionsDisplay);
+        $weatherStation->changeWeatherData(
             new WeatherInfo(floatval(rand(0, 100)), floatval(rand(0, 100)), floatval(rand(0, 100)))
         );
     }
