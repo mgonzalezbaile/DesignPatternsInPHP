@@ -40,4 +40,4 @@ In this example you can see that the Subject is not the User itself but a generi
 
 ![image](https://cloud.githubusercontent.com/assets/1727504/14114274/e0afe050-f5c5-11e5-98ca-603f4ed4e24e.png)
 
-If in the future business asks us to perform a new action when a new user is created, we will only need to create a new Observer doind that functionality. As you can see no modifications on exisiting classes would be needed.
+If in the future business asks us to perform a new action when a new user is created, we will only need to create a new Observer doing that functionality. As you can see no modifications on existing classes would be needed.
