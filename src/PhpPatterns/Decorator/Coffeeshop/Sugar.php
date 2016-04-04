@@ -4,6 +4,8 @@ namespace PhpPatterns\Decorator\Coffeeshop;
 
 class Sugar extends Condiment
 {
+    const COST = 50;
+
     /**
      * @return string
      */
@@ -14,6 +16,6 @@ class Sugar extends Condiment
 
     public function cost()
     {
-        return $this->product->cost() + 50;
+        return $this->product->cost() + self::COST;
     }
 }
