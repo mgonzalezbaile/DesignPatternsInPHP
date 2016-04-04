@@ -1,10 +1,6 @@
 <?php
 
-namespace PhpPatterns;
-
-use PhpPatterns\Observer\DomainEvents\DomainEventPublisher;
-use PhpPatterns\Observer\DomainEvents\NewUserWasCreated;
-use PhpPatterns\Observer\DomainEvents\UserId;
+namespace PhpPatterns\Observer\DomainEvents;
 
 class User
 {
