@@ -2,8 +2,6 @@
 
 namespace PhpPatterns\Observer\DomainEvents;
 
-use PhpPatterns\User;
-
 class UserCreationTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreateNewUser()
