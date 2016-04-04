@@ -14,13 +14,23 @@ class OrderBeveragesTest extends \PHPUnit_Framework_TestCase
         $teaWithMilk = new Milk($tea);
         $teaWithMilkAndLemon = new Lemon($teaWithMilk);
 
-        echo 'Total cost: ' . $teaWithMilkAndLemon->cost();
+        echo 'Total cost: '.$teaWithMilkAndLemon->cost();
 
         $this->assertEquals(Tea::COST + Milk::COST + Lemon::COST, $teaWithMilkAndLemon->cost());
     }
 
     public function testOrderCoffee()
     {
-        //TODO
+        /**
+         *  Product $coffee
+         */
+        $coffee = new Coffee();
+
+        $coffeeWithMilk = new Milk($coffee);
+        $coffeeWithMilkAndSugar = new Sugar($coffeeWithMilk);
+
+        echo 'Total cost: '.$coffeeWithMilkAndSugar->cost();
+
+        $this->assertEquals(Coffee::COST + Milk::COST + Sugar::COST, $coffeeWithMilkAndSugar->cost());
     }
 }
