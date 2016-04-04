@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpPatterns\Decorator\Coffeeshop;
+namespace PhpPatterns\Decorator\CoffeeShop;
 
 abstract class Condiment implements Product
 {

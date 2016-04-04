@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpPatterns\Decorator\Coffeeshop;
+namespace PhpPatterns\Decorator\CoffeeShop;
 
-class Milk extends Condiment
+class Sugar extends Condiment
 {
     const COST = 50;
 
@@ -11,7 +11,7 @@ class Milk extends Condiment
      */
     public function description()
     {
-        return 'Milk';
+        return 'sugar';
     }
 
     public function cost()

@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpPatterns\Decorator\Coffeeshop;
+namespace PhpPatterns\Decorator\CoffeeShop;
 
 class Tea implements Product
 {
