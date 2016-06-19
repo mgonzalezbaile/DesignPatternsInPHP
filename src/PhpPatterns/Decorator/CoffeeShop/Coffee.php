@@ -2,7 +2,7 @@
 
 namespace PhpPatterns\Decorator\CoffeeShop;
 
-class Coffee implements Product
+class Coffee implements Buyable
 {
     const COST = 37;
 

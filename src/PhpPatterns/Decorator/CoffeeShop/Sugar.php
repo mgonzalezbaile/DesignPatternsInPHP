@@ -16,6 +16,6 @@ class Sugar extends Condiment
 
     public function cost()
     {
-        return $this->product->cost() + self::COST;
+        return $this->buyable->cost() + self::COST;
     }
 }

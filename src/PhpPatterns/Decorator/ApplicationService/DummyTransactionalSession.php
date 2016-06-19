@@ -16,7 +16,6 @@ class DummyTransactionalSession implements TransactionalSession
         try {
             $return = call_user_func($executeCallback);
 
-            echo "flush changes\n";
             echo "commit transaction\n";
 
             return $return;

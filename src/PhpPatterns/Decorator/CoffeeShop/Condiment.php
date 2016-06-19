@@ -2,20 +2,21 @@
 
 namespace PhpPatterns\Decorator\CoffeeShop;
 
-abstract class Condiment implements Product
+abstract class Condiment implements Buyable
 {
     /**
-     * @var Product
+     * @var Buyable
      */
-    protected $product;
+    protected $buyable;
 
     /**
      * Condiment constructor.
-     * @param Product $product
+     *
+     * @param Buyable $buyable
      */
-    public function __construct(Product $product)
+    public function __construct(Buyable $buyable)
     {
-        $this->product = $product;
+        $this->buyable = $buyable;
     }
 
     /**

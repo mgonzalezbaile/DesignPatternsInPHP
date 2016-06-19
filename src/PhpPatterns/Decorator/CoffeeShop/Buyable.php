@@ -2,7 +2,7 @@
 
 namespace PhpPatterns\Decorator\CoffeeShop;
 
-interface Product
+interface Buyable
 {
     public function cost();
 }
