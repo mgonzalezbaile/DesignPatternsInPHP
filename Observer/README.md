@@ -38,7 +38,8 @@ public function changeUserPasswordAndNotify(User $user, $newPassword)
 ```
 
 We have been forced to touch a method that we knew it was already working properly, with the risk to introduce bugs to it. This breaks the Open Closed Principle, that says that you must keep your code open for extension but closed for modification.
-Also, now you need to make even more complex the test that you already had for that method to assert that:
+Also, now you need to make even more complex the test that you already had to assert that:
+
 1. The password was changed
 2. The email was sent
 3. The sms was sent
@@ -78,7 +79,7 @@ class User {
 }
 ```
 
-Now we can have the notifier observer listening to the PasswordChanged action:
+Now we can have the observer listening to the PasswordChanged action:
 
 ```
 class UserPasswordChangesNotifier {
@@ -131,7 +132,7 @@ class UserPasswordChangesSmsNotifier {
 }
 ```
 
-Look how easy is now to add new reaction behaviors without modifying any of the existing classes. Putting all together let's see how the previous procedural code looks:
+So now every reaction is decoupled from each other making very easy the addition of new behavior without modifying existing classes. Putting all together let's see how the previous procedural code looks:
 
 We need first to set up the User with all the subscribers, a factory class can be responsible for it:
 
