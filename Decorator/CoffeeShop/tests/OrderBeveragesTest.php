@@ -1,6 +1,10 @@
 <?php
 
-namespace PhpPatterns\Decorator\CoffeeShop;
+use PhpPatterns\Decorator\CoffeeShop\Coffee;
+use PhpPatterns\Decorator\CoffeeShop\Lemon;
+use PhpPatterns\Decorator\CoffeeShop\Milk;
+use PhpPatterns\Decorator\CoffeeShop\Sugar;
+use PhpPatterns\Decorator\CoffeeShop\Tea;
 
 class OrderBeveragesTest extends \PHPUnit_Framework_TestCase
 {

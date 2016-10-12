@@ -16,8 +16,13 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "PhpPatterns": "src"
+        "psr-4": {
+            "PhpPatterns\\Decorator\\CoffeeShop\\": "Decorator/CoffeeShop/src",
+            "PhpPatterns\\Decorator\\ApplicationService\\": "Decorator/ApplicationService/src",
+            "PhpPatterns\\Observer\\": "Observer",
+            "PhpPatterns\\Observer\\DomainEvents\\": "Observer/DomainEvents/src",
+            "PhpPatterns\\Observer\\WeatherStation\\": "Observer/WeatherStation/src",
+            "PhpPatterns\\Specification\\EmailDelivery\\": "Specification/EmailDelivery/src"
         }
     },
     "config": {
