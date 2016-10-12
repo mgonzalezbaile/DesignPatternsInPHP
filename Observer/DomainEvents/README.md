@@ -1,23 +1,119 @@
 ### Domain Events
-`Domain Event` is a very important concept in [Domain Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design). They provide a good approach to apply rules that are important for your business in a decoupled way.
+`Domain Event` is a very important concept in [Domain Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design) that defines something that has happened in the past. Based on the Publisher/Subscriber pattern they provide the perfect approach to make code in a decoupled way.
 
-Let's explain them with an example. Imagine that business says: 
+![image](https://cloud.githubusercontent.com/assets/1727504/19317428/4888a52a-90a5-11e6-86aa-abead6a3e197.png)
+
+Domain Events capture information from an external stimulus (what happened) and probably the changes on the state of some Entity due to the stimulus so you can see what happened and the changes at any moment. Domain Events are frequently defined by domain experts when they explain the behavior of the system, for instance: 
 
 > Whenever a new user is created into the platform the customer department must be notified by email.
 
-Ok, that's easy. I can create a service that registers a new user and sends an email to that department. But imagine that two months later business comes to you and say:
+We can see in the sentence that we are performing some action (user creation) so after it happened something else has to be done (notification). The Domain Event is `UserCreated` and some info it can hold is the name of the user, the email, etc.
 
-> Now, in addition to send the email I want you to give to the user a 15 trial days to use the brand new tool that we released last week.
+So far, everything looks exactly the same as what is explained in the [Observer pattern section](https://github.com/mgonzalezbaile/DesignPatternsInPHP/tree/master/Observer) and [Weather Station example](https://github.com/mgonzalezbaile/DesignPatternsInPHP/tree/master/Observer/WeatherStation). The difference is more about the implementation.
 
-Ok, easy too. You go to the service that is in charge of creating the user and adds the new business logic requested.
+In this case, the pattern implementation defined in DDD follows the Singleton Pattern in the form of a generic Publisher in charge of managing the register of subscribers as well as the delivery of the events to them. In this way we avoid polluting our Subject entities with methods (subscribe, notify, ...) that nothing has to do with business behavior. 
 
-As you can see, every time business wants to perform a new action when a new user is created you need to go to the same service and apply the pertinent modifications. We are breaking the [Open Closed Principle](https://en.wikipedia.org/wiki/Open/closed_principle).
+```
+class DomainEventPublisher implements Subject
+{
+    /**
+     * @var Observer[]
+     */
+    private $observers;
 
-Observer Pattern to the rescue! Again we can apply the Observer pattern to decouple an action on the Subject from the business rules that must be satisfied when that action happens. We only need to implement those rules in different observers (one in charge of sending emails, another one to give the trial days, etc) so they will be notified when a new user is created in the same way we did in the Weather Station example.
+    /**
+     * @var self
+     */
+    private static $instance = null;
 
-In this example you can see that the Subject is not the User itself but a generic Publisher class instead. The reason is that we can make use of a more generic class in charge of publishing the event and reuse it for any kind of event we want to publish.
+    /**
+     * @var Notification
+     */
+    private $domainEvent;
+
+    /**
+     * @return self
+     */
+    public static function instance()
+    {
+        if (null === static::$instance) {
+            static::$instance = new self();
+        }
+
+        return static::$instance;
+    }
+
+    /**
+     * DomainEventPublisher constructor.
+     */
+    private function __construct()
+    {
+        $this->observers = [];
+    }
+
+    /**
+     * @param Observer $observer
+     */
+    public function registerObserver(Observer $observer)
+    {
+        $this->observers[] = $observer;
+    }
+
+    public function notifyObservers()
+    {
+        foreach ($this->observers as $observer) {
+            if ($observer->isSubscribedTo($this->domainEvent)) {
+                $observer->handleNotification($this->domainEvent);
+            }
+        }
+    }
+
+    /**
+     * @param Notification $domainEvent
+     */
+    public function publish(Notification $domainEvent)
+    {
+        $this->domainEvent = $domainEvent;
+        $this->notifyObservers();
+    }
+}
+```
+
+In our code example we have an use case saying that
+
+> Whenever a new User is created in the system, we must notify him via email and start a 15 trial period.
+
+Now the User class does not need to implement the methods to notify/subscribe others and it can be focused on just business behavior and invariants:
+
+```
+class User
+{
+    /**
+     * @var UserId
+     */
+    private $userId;
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->userId = new UserId();
+
+        DomainEventPublisher::instance()->publish(new NewUserWasCreated($this->userId));
+    }
+}
+```
+
+In web applications, it is the entry point (index) the best place to set up our Publisher and register all the Subscribers:
+
+```
+DomainEventPublisher::instance()->registerObserver(new NewUserWasCreatedEmailNotifier());
+DomainEventPublisher::instance()->registerObserver(new NewUserWasCreatedTrialDaysManager());
+```
+
+Therefore we don't need to make the instantiation of an User complex like it happened in the example given in the [Observer pattern section](https://github.com/mgonzalezbaile/DesignPatternsInPHP/tree/master/Observer).
 
 ![image](https://cloud.githubusercontent.com/assets/1727504/14114274/e0afe050-f5c5-11e5-98ca-603f4ed4e24e.png)
 
-If in the future business asks us to perform a new action when a new user is created, we will only need to create a new Observer doing that functionality. As you can see no modifications on existing classes would be needed.
 
