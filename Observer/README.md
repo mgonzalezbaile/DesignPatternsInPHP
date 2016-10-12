@@ -1,7 +1,7 @@
 ## Observer Pattern
 Observer pattern defines a one-to-many dependency between objects so that when one object changes state (Subject), all its dependents (Observers) are notified and updated automatically.
 
-Observer (a.k.a Publisher/Subscriber) is one of the best patterns to implement classes that interact each other in a decoupled way. On one hand the Subject only knows that when something important happens to her she must notify the observers, but she does not know anything about what the observers do with the notification. On the other hand, the observers don't know what is going on in the subject until they get notified to perform some action with the incoming info.
+Observer is one of the best patterns to implement classes that interact each other in a decoupled way. On one hand the Subject only knows that when something important happens to her she must notify the observers, but she does not know anything about what the observers do with the notification. On the other hand, the observers don't know what is going on in the subject until they get notified to perform some action with the incoming info.
 
 ### Problem Scenario
 
