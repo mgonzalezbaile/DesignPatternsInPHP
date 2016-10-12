@@ -162,3 +162,8 @@ So the benefits that we get from applying the Observer pattern are:
 1. Single Responsibility Principle. Now each class does just one single action.
 2. Open Closed Principle. We can keep adding more behaviour when the password changes without modifying anything but just subscribing one more Observer in the UserFactory class.
 3. Unit tests very short and contained. The test of the method `changeUserPassword` only has to assert that the password was changed, and the same applies to the other classes.
+
+### Examples in code
+
+- [WeatherStation](https://github.com/mgonzalezbaile/DesignPatternsInPHP/tree/master/Observer/WeatherStation): Similar to the User example shown here, you can find a full implementation example with some tests to try out the code. 
+- [DomainEvents](https://github.com/mgonzalezbaile/DesignPatternsInPHP/tree/master/Observer/DomainEvents): Publisher/Subscriber is a variant from the Observer pattern where the logic to notify is encapsulated in to a Singleton class. Therefore, we avoid adding to the Subject classes the responsibility to subscribe and notify to others, which makes harder (as we saw with the UserFactory class) to instantiate the Subject.
