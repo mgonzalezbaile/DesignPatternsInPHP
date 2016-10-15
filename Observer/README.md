@@ -159,7 +159,8 @@ public method changeUserPassword(User $user, $newPassword)
 
 ### Benefits
 
-So the benefits that we get from applying the Observer pattern are:
+Benefits that we get from applying the Observer pattern are:
+
 1. Single Responsibility Principle. Now each class does just one single action.
 2. Open Closed Principle. We can keep adding more behaviour when the password changes without modifying anything but just subscribing one more Observer in the UserFactory class.
 3. Unit tests very short and contained. The test of the method `changeUserPassword` only has to assert that the password was changed, and the same applies to the other classes.
