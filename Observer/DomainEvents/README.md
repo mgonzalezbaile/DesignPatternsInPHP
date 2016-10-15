@@ -1,4 +1,6 @@
-### Domain Events
+# Domain Events
+
+## Definition
 `Domain Event` is a very important concept in [Domain Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design) that defines something that has happened in the past. Based on the Publisher/Subscriber pattern they provide the perfect approach to make code in a decoupled way.
 
 ![image](https://cloud.githubusercontent.com/assets/1727504/19317428/4888a52a-90a5-11e6-86aa-abead6a3e197.png)
@@ -79,11 +81,13 @@ class DomainEventPublisher implements Subject
 }
 ```
 
-In our code example we have an use case saying that
+## Use Case
+
+To see how Domain Events work in code let's consider the next use case:
 
 > Whenever a new User is created in the system, we must notify him via email and start a 15 trial period.
 
-Now the User class does not need to implement the methods to notify/subscribe others and it can be focused on just business behavior and invariants:
+Thanks to the `DomainEventPublisher` now the `User` class does not need to implement the methods to notify/subscribe others and it can be focused on just business behavior and invariants:
 
 ```
 class User
@@ -105,14 +109,62 @@ class User
 }
 ```
 
-In web applications, it is the entry point (index) the best place to set up our Publisher and register all the Subscribers:
+We are publishing the domain event `NewUserWasCreated` when the user is created. Now we need to notify the user and give her a 15 days trial period:
+
+```
+class NewUserWasCreatedEmailNotifier implements Observer
+{
+    /**
+     * @param Notification|NewUserWasCreated $notification
+     */
+    public function handleNotification(Notification $notification)
+    {
+        echo 'Sending an email to customer department for the user: '.$notification->userId()."\n";
+    }
+
+    /**
+     * @param Notification $notification
+     * @return bool
+     */
+    public function isSubscribedTo(Notification $notification)
+    {
+        return $notification instanceof NewUserWasCreated;
+    }
+}
+```
+
+```
+class NewUserWasCreatedTrialDaysManager implements Observer
+{
+    /**
+     * @param Notification|NewUserWasCreated $notification
+     */
+    public function handleNotification(Notification $notification)
+    {
+        echo 'Giving 15 trial days to the user: '.$notification->userId()."\n";
+    }
+
+    /**
+     * @param Notification $notification
+     * @return bool
+     */
+    public function isSubscribedTo(Notification $notification)
+    {
+        return $notification instanceof NewUserWasCreated;
+    }
+}
+```
+
+The code of the Subscribers (`NewUserWasCreatedEmailNotifier` and `NewUserWasCreatedTrialDaysManager`) is exactly the same than the Observers from [Observer pattern section](https://github.com/mgonzalezbaile/DesignPatternsInPHP/tree/master/Observer). The last step is to bind the subscribers with the publisher, in web applications this occurs in the entry point file (index.php):
 
 ```
 DomainEventPublisher::instance()->registerObserver(new NewUserWasCreatedEmailNotifier());
 DomainEventPublisher::instance()->registerObserver(new NewUserWasCreatedTrialDaysManager());
 ```
 
-Therefore we don't need to make the instantiation of an User complex like it happened in the example given in the [Observer pattern section](https://github.com/mgonzalezbaile/DesignPatternsInPHP/tree/master/Observer).
+Therefore we don't need to make the instantiation of an User complex like it happened in the example given in the [Observer pattern section](https://github.com/mgonzalezbaile/DesignPatternsInPHP/tree/master/Observer) where a factory was required.
+
+## UML
 
 ![image](https://cloud.githubusercontent.com/assets/1727504/14114274/e0afe050-f5c5-11e5-98ca-603f4ed4e24e.png)
 
